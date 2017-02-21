@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} P&aacute;gina de Inicio {% endblock %}
+
+{% block content %}
+Usted es un funcionario del area {{ request.user.usuario.rol}}
+<h1>P&aacute;gina de Inicio</h1>
+<p>Bienvenido a tu p&aacute;gina de inicio!</p>
+{% if request.user.usuario.rol == 'recepcion' %}
+		<form action="/account/" method="post">
+			{% csrf_token %}
+			{{ form }}
+			{% if not no_submit %}
+				<input type="submit" value="Verificar" />
+			{% endif %}
+		</form>
+		<form>
+			{% csrf_token %}
+			{{ form_uno }}
+		</form>
+		<form>
+			{% csrf_token %}
+			{{ form_dos }}
+		</form>
+{% if turno == True %}
+	<a href='/turno/asignar/{{ usuario.id }}'>Asignar Turno</a>
+{% endif %}
+{% endif %}
+{% endblock %}

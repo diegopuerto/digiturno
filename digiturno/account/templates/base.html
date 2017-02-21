@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<title>{% block title %} {% endblock %}</title>
+				<link href="{% static "css/base.css" %}" rel="stylesheet">
+		</head>
+		<body>
+				<div id=header>
+						<span class=logo>DANE DIGITURNO</span>
+						{% if request.user.is_authenticated %}
+							<ul class="menu">
+									<li {% if section == "dashboard" %}class="selected"{% endif %}>
+										<a href="{% url "dashboard" %}">Mi P&aacute;gina de Inicio</a>
+									</li>
+							</ul>
+						{% endif %}
+						<span class="user">
+								{% if request.user.is_authenticated %}
+									Hola {{ request.user }},
+									<a href="{% url "logout" %}">Logout</a>
+								{% else %}
+									<a href="{% url "login" %}">Login</a>
+								{% endif %}
+						</span>
+				</div>
+				<div id=content>
+						{% block content %}
+						{% endblock %}
+				</div>
+		</body>
+</html>

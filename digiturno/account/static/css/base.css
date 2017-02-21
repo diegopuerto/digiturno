@@ -1,0 +1,75 @@
+body {
+	margin: 0px;
+	font: 22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#header {
+	background-color: #26E566;
+	padding: 10px;
+	font: 35px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: white;
+	margin: 0px;
+	margin-bottom:40px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#content {
+	width: 800px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#login {
+	width: 400px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.button {
+    background-color: #26E566;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius: 8px;
+}
+
+#id_username {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#id_password {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+	width: 800px;
+	display:inline-block;
+	margin-left:100px;
+}
+
+a {
+	color: black;
+}

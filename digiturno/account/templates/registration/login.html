@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+	<h3 id="login">Ingresa tus datos</h3>
+	{% if form.errors %}
+		<p>
+			Tu usuario o contrasena no son conrrectos.
+			Por favor intenta de nuevo.
+		</p>
+	{% else %}
+		<p>Por favor ingresa tus datos para acceder al sistema:</p>
+	{% endif %}
+
+	<div class="login-form">
+			<form action="{% url 'login' %}" method="post">
+					{{ form.as_p }}
+					{% csrf_token %}
+					<input type="hidden" name="next" value="{{ next }}" >
+					<p><input class="button" type="submit" value="Ingresar"></p>
+			</form>
+	</div>
+{% endblock %}

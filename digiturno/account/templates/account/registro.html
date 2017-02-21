@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Usuario no encontrado {% endblock %}
+
+{% block content %}
+<h1>Registro de un nuevo usuario</h1>
+<form action="/account/registro/" method="post">
+	{% csrf_token %}
+	{{ form }}
+	{% if not no_submit %}
+		<input type="submit" value="Submit" />
+	{% endif %}
+</form>
+<p>{{ mensaje }} {{ nombre }}</p>
+<p>{{ excepcion }}</p>
+{% if turno %}
+	<a href='/turno/asignar/'>Asignar Turno</a>
+{% endif %}
+{% endblock %}

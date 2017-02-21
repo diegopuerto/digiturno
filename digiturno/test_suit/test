@@ -1,0 +1,9 @@
+usuario = User.objects.get(username='diego')
+recepcionista = User.objects.get(username='Aseneth')
+atencion = User.objects.get(username='Paola')
+
+usuario = Usuario.objects.get(user__username='diego')
+recepcionista = Usuario.objects.get(user__username='Aseneth')
+atencion = Usuario.objects.get(user__username='Paola')
+turno = Turno(recepcionista=recepcionista, usuario=usuario)
+

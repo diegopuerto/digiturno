@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} Usuario no encontrado {% endblock %}
+
+{% block content %}
+<h1>El usuario no fue encontrado.{{ exception }}</h1>
+<a href=/account/>Intentelo de nuevo</a>
+<a href=/account/registro>Registrar Usuario</a>
+{% endblock %}
