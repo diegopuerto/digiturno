@@ -3,15 +3,20 @@
 {% block title %} P&aacute;gina de Inicio {% endblock %}
 
 {% block content %}
+<div id="mensaje">
+</div>
 Usted es un funcionario del area {{ request.user.usuario.rol}}
 <h1>P&aacute;gina de Inicio</h1>
 <p>Bienvenido a tu p&aacute;gina de inicio!</p>
 {% if request.user.usuario.rol == 'recepcion' %}
-		<form action="/account/" method="post">
+		<form id="form_cedula">
 			{% csrf_token %}
 			{{ form }}
 			{% if not no_submit %}
+                                <!--
 				<input type="submit" value="Verificar" />
+                        -->
+                    <button id="verificar_button" value="Verificar">Verificar</button>
 			{% endif %}
 		</form>
 		<form>
@@ -22,8 +27,32 @@ Usted es un funcionario del area {{ request.user.usuario.rol}}
 			{% csrf_token %}
 			{{ form_dos }}
 		</form>
+                <div id="content_post"></div>
+
 {% if turno == True %}
 	<a href='/turno/asignar/{{ usuario.id }}'>Asignar Turno</a>
 {% endif %}
 {% endif %}
+<script>
+$("#verificar_button").click(function (ev){
+    ev.preventDefault();
+    var id_c = document.getElementById("id_cedula").value;
+    console.log(id_c);
+    $.ajax({
+        type: 'post',
+        url: '/account/cedula/',
+        data: $('#form_cedula').serialize(),
+        success: function(data){
+            console.log("exito");
+            $('#mensaje').html("");
+        },
+        statusCode:{
+            201: function(data){
+                console.log("error: "+data);
+                $('#mensaje').html(data);
+            }
+        },
+    })
+})
+</script>
 {% endblock %}
