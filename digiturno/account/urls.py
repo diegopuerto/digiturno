@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^$', views.dashboard, name='dashboard'),
 #    url(r'^verificacion/$', views.dashboard, name='verificacion'),
     url(r'^registro/$', views.registro, name='registro'),
+    url(r'^cedula/$', views.dashboard, name='ajax_dashboard'),
 ]
