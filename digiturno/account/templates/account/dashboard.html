@@ -26,4 +26,14 @@ Usted es un funcionario del area {{ request.user.usuario.rol}}
 	<a href='/turno/asignar/{{ usuario.id }}'>Asignar Turno</a>
 {% endif %}
 {% endif %}
+{% if request.user.usuario.rol == 'atencion' and not button%}
+	<a href='/turno/tomar/'>Tomar Turno</a>
+{% endif %}
+{% if tomado %}
+	<p>Usted ha tomado el turno {{turno.turno}}</p>
+	<a href='/turno/siguiente/'>Siguiente Turno</a>
+{% endif %}
+{% if exception %}
+	<p>No hay mas turnos en cola</p>
+{% endif %}
 {% endblock %}
