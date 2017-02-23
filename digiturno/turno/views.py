@@ -30,7 +30,11 @@ def asignar(request, usuario_id ):
     turno_dos = Turno.objects.last()
     return HttpResponse('<h1>turno:%s</h1>'%turno_dos.turno)
 
-def tomar(request):
+def tomar(request, turno_id=None):
+    if turno_id != None:
+        turno = Turno.objects.get(id=turno_id)
+        turno.fecha_fin = now()
+        
     hoy = now().date()
     hoy_inicio = datetime.combine(hoy, time())
     try:
@@ -42,10 +46,9 @@ def tomar(request):
         return render(request,
                       'account/dashboard.html',
                       {'exception': e})
-#    return HttpResponse('%r es el primer turno que voy a tomar'%turno.turno)
     return render(request,
                   'account/dashboard.html',
                   {'turno': turno,
                    'tomado': True,
                    'button': True})
-                    
+                   
