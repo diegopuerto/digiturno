@@ -1,0 +1,22 @@
+<html>
+    <body>
+    <p id="p1">Hello World!</p>
+    <input type="text" name=valor id="texto"><br>
+    <button id="boton" onclick="enviar_texto()">Enviar mensaje</button>
+    </body>
+    <script>
+        socket = new WebSocket("ws://" + window.location.host + "/chat/");
+        socket.onmessage = function(e) {
+            document.getElementById("p1").innerHTML = e.data;
+        }
+        socket.onopen = function() {
+            //    socket.send("hello world");
+        }
+        if (socket.readyState == WebSocket.OPEN) socket.onopen();
+        function enviar_texto(){
+            var paquete = "[{{user}}]: "+document.getElementById("texto").value;
+            socket.send(paquete);
+        }
+    </script>
+</html>
+
