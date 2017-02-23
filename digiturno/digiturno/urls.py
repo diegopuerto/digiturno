@@ -20,5 +20,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('account.urls')),
     url(r'^turno/', include('turno.urls')),
-    url(r'^canal/', include('canal.urls')),
 ]
