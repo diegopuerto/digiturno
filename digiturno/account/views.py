@@ -8,37 +8,44 @@ from .forms import IdentificacionForm, InfoUsuarioForm, InfoUserForm, RegistroFo
 from .models import Usuario
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required
+@csrf_exempt
 def dashboard(request):
+                
     if request.method == 'POST':
-        form = IdentificacionForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            try:
-                usuario = Usuario.objects.get(cedula=cd['cedula'])
-            except Exception as e:
-                #return HttpResponse("<h1>El usuario no existe: %s</h1>" % (e))
-                return render(request,
-                              'account/not_found_user.html',
-                              {'exception': e})
-            user = usuario.user
-            if usuario:
-                form_uno = InfoUsuarioForm(instance = usuario)
-                form_dos = InfoUserForm(instance = user)
-                return render(request,
-                              'account/dashboard.html',
-                              {'section': 'dashboard',
-                               'form_uno': form_uno, 
-                               'form_dos': form_dos,
-                               'no_submit':True,
-                               'turno': True,
-                               'usuario': usuario})
-            else:
-                return render(request,
-                              'account/dashboard.html',
-                              {'section': 'dashboard',
-                               'form': form})
+        print ("request.post: %s"%request.POST)
+        if request.is_ajax():
+            form = IdentificacionForm(request.POST)
+            if form.is_valid():
+                cd = form.cleaned_data
+                try:
+                    usuario = Usuario.objects.get(cedula=cd['cedula'])
+                except Exception as e:
+                    #return HttpResponse("<h1>El usuario no existe: %s</h1>" % (e))
+                    return render(request,
+                                  'account/not_found_user.html',
+                                  {'exception': e},
+                                  status = 201 
+                                  )
+                user = usuario.user
+                if usuario:
+                    form_uno = InfoUsuarioForm(instance = usuario)
+                    form_dos = InfoUserForm(instance = user)
+                    return render(request,
+                                  'account/dashboard.html',
+                                  {'section': 'dashboard',
+                                   'form_uno': form_uno, 
+                                   'form_dos': form_dos,
+                                   'no_submit':True,
+                                   'turno': True,
+                                   'usuario': usuario})
+                else:
+                    return render(request,
+                                  'account/dashboard.html',
+                                  {'section': 'dashboard',
+                                   'form': form})
     else:
         form = IdentificacionForm() 
         return render(request,
