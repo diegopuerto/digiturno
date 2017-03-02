@@ -20,10 +20,12 @@ class Turno(models.Model):
     def __str__(self):
         return "No. %r" % (self.turno)
 
-    def is_active(self):
+    def _is_active(self):
             if self.fecha_inicio and not self.fecha_fin:
                 return True
             else:
                 return False
+
+    is_active = property(_is_active)
 
 
