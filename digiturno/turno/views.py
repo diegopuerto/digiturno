@@ -60,3 +60,12 @@ def cola(request):
 def cambiar(request):
     user = request.user
     return render(request,'turno/cambiar.html', {'user':user})
+
+@login_required
+def atencion(request):
+    user = request.user
+    turnos = Turno.objects.filter(is_active=False)
+    print ("turnos %s"%turnos)
+    return render(request,'turno/atencion.html', {'user':user})
+
+
